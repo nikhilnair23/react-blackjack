@@ -26,8 +26,8 @@ function App() {
         deck = Deck.shuffle(deck);
         setDeck(deck);
         setGameState(game.STARTED);
-        let dealer = deck.splice(0,2);
-        let player = deck.splice(0,2);
+        let dealer = deck.splice(0, 2);
+        let player = deck.splice(0, 2);
         setDealerHand(dealer);
         setPlayerHand(player);
         setDeck(deck);
@@ -56,18 +56,23 @@ function App() {
             <div className="col p-4">
                 <div className="playing-space">
                     <h3>Dealer</h3>
+                    <div className="float-right">
+                    <h3>Dealer Score: <span>{dealerScore}</span></h3>
+                    </div>
                     <div className="playing-hand">
-                    {dealerHand.map((card) =>
-                    <Card card={card}/>
-                    )}
+                        {dealerHand.map((card) =>
+                            <Card card={card}/>
+                        )}
                     </div>
                 </div>
                 <div className="playing-space">
                     <h3>Player</h3>
-                    <div className="playing-hand">
-                    {playerHand.map((card) =>
-                    <Card card = {card}/>
-                    )}
+                    <div className="row">
+                        <div className="playing-hand">
+                            {playerHand.map((card) =>
+                                <Card card={card}/>
+                            )}
+                        </div>
                     </div>
                 </div>
 

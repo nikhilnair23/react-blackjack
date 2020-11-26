@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background: darkgreen;
+  background: radial-gradient(ellipse at center, #16A757 0%,#116336 85%);
   height: inherit;
   width: 100%;
   position: absolute;
