@@ -24,6 +24,7 @@ function App() {
 
     const startGame = () => {
         let deck = Deck.createDeck();
+        deck = Deck.shuffle(deck);
         setDeck(deck);
         setGameState(game.STARTED);
         let dealer = deck.splice(0,2);
