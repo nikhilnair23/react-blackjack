@@ -1,4 +1,4 @@
-import '../App.css';
+import '../styles/App.css';
 import Deck from './Deck';
 import {PlayingHand} from "./PlayingHand";
 import {useEffect, useReducer} from 'react';
