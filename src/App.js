@@ -68,7 +68,6 @@ function App() {
         }
         dispatch({type: 'UPDATE_DEALER', payload:obj});
         if(gameState != Game.END){
-            debugger;
             dispatch({type: 'UPDATE_STATE', payload: Game.END})
             let result = checkScores(playerScore,score, Game.END);
             setTimeout(function () {
