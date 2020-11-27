@@ -1,5 +1,4 @@
-let suits = ['S', 'H', 'D', 'C'];
-let values = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+import {suits, values} from './constants'
 
 export default class Deck {
 
@@ -7,7 +6,6 @@ export default class Deck {
         let deck = [];
         for(let i =0; i<suits.length;i++){
             for(let j =0; j<values.length;j++){
-                //let card = suits[i] + values[j];
                 let card = {suit: suits[i], value: values[j]};
                 deck.push(card);
             }
@@ -18,15 +16,14 @@ export default class Deck {
 
     // Knuth Shuffle
     static shuffle = (deck) => {
-        var currentIndex = deck.length
-            , temporaryValue
-            , randomIndex
-        ;
+        let currentIndex = deck.length;
+        let temporaryValue;
+        let randomIndex;
 
-        // While there remain elements to shuffle...
+        // While there remain elements to shuffle
         while (0 !== currentIndex) {
 
-            // Pick a remaining element...
+            // Pick a remaining element
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex -= 1;
 

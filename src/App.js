@@ -4,12 +4,8 @@ import {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Card} from "./Card";
 import 'bootstrap/dist/css/bootstrap.css';
-
-const game = {
-    INIT: 'init',
-    STARTED: 'started',
-    END: 'end'
-}
+import {calculateScore} from "./utils";
+import {game} from "./constants";
 
 
 function App() {
@@ -30,6 +26,8 @@ function App() {
         let player = deck.splice(0, 2);
         setDealerHand(dealer);
         setPlayerHand(player);
+        setDealerScore(calculateScore(dealer));
+        setPlayerScore(calculateScore(player));
         setDeck(deck);
     }
 
@@ -48,6 +46,7 @@ function App() {
         hand.push(card);
         setPlayerHand([...hand]);
         setDeck(currDeck);
+        setPlayerScore(calculateScore(playerHand));
     }
 
 
@@ -56,9 +55,7 @@ function App() {
             <div className="col p-4">
                 <div className="playing-space">
                     <h3>Dealer</h3>
-                    <div className="float-right">
                     <h3>Dealer Score: <span>{dealerScore}</span></h3>
-                    </div>
                     <div className="playing-hand">
                         {dealerHand.map((card) =>
                             <Card card={card}/>
@@ -67,6 +64,7 @@ function App() {
                 </div>
                 <div className="playing-space">
                     <h3>Player</h3>
+                    <h3>Player Score: <span>{playerScore}</span></h3>
                     <div className="row">
                         <div className="playing-hand">
                             {playerHand.map((card) =>
