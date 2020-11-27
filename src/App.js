@@ -1,6 +1,6 @@
 import './App.css';
 import Deck from './Deck';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Card} from "./Card";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -17,6 +17,10 @@ function App() {
     const [dealerHand, setDealerHand] = useState([]);
     const [gameState, setGameState] = useState(game.INIT);
 
+    useEffect(() => {
+        checkWinner();
+    },[playerScore,dealerScore])
+
     const startGame = () => {
         let deck = Deck.createDeck();
         deck = Deck.shuffle(deck);
@@ -28,6 +32,7 @@ function App() {
         setPlayerHand(player);
         setDealerScore(calculateScore(dealer));
         setPlayerScore(calculateScore(player));
+        // checkWinner();
         setDeck(deck);
     }
 
@@ -49,6 +54,29 @@ function App() {
         setPlayerScore(calculateScore(playerHand));
     }
 
+    const checkWinner = () => {
+        debugger;
+        if(playerScore < 21 && dealerScore < 21){
+
+        }else{
+            if (playerScore == 21 && dealerScore == 21) {
+
+            }
+            else if (playerScore == 21){
+                alert("Player Wins");
+            }else if(dealerScore == 21){
+                alert("Dealer Wins");
+            }
+            else if(playerScore > 21){
+                alert("Dealer Wins");
+            }else if(dealerScore > 21){
+                alert("Player wins");
+            }
+            setGameState(game.END);
+        }
+
+    }
+
 
     return (
         <div className="App">
@@ -57,20 +85,20 @@ function App() {
                     <h3>Dealer</h3>
                     <h3>Dealer Score: <span>{dealerScore}</span></h3>
                     <div className="playing-hand">
-                        {dealerHand.map((card) =>
-                            <Card card={card}/>
+                        {dealerHand.map((card, index) =>
+                            <Card key={index}
+                                  card={card}/>
                         )}
                     </div>
                 </div>
                 <div className="playing-space">
                     <h3>Player</h3>
                     <h3>Player Score: <span>{playerScore}</span></h3>
-                    <div className="row">
-                        <div className="playing-hand">
-                            {playerHand.map((card) =>
-                                <Card card={card}/>
-                            )}
-                        </div>
+                    <div className="playing-hand">
+                        {playerHand.map((card, index) =>
+                            <Card key={index}
+                                  card={card}/>
+                        )}
                     </div>
                 </div>
 

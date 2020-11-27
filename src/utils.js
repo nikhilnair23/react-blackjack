@@ -20,3 +20,9 @@ export const calculateScore = (deck) => {
     return score;
 }
 
+export const checkWinner = () => {
+
+}
+
+
+
