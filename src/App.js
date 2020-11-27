@@ -32,7 +32,6 @@ function App() {
         setPlayerHand(player);
         setDealerScore(calculateScore(dealer));
         setPlayerScore(calculateScore(player));
-        // checkWinner();
         setDeck(deck);
     }
 
@@ -55,7 +54,6 @@ function App() {
     }
 
     const checkWinner = () => {
-        debugger;
         if(playerScore < 21 && dealerScore < 21){
 
         }else{
