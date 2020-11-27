@@ -81,8 +81,8 @@ function App() {
 
     return (
         <div className="App">
-            <h1 className="text-danger font-weight-bold p-4">BlackJack</h1>
-            <div className="col p-4">
+            <h1 className="text-danger font-weight-bold p-2">BlackJack</h1>
+            <div className="col p-2">
                 <div className="playing-space">
                     <h2 className="text-white">Dealer</h2>
                     <h3>Dealer Score: <span>{dealerScore}</span></h3>

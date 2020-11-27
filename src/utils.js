@@ -51,8 +51,11 @@ const checkWinner = (playerScore, dealerScore) => {
     }
     if (playerScore > dealerScore) {
         return GameResults.PLAYER_WINS
-    } else {
+    }
+    if (dealerScore > playerScore){
         return GameResults.DEALER_WINS;
+    }else{
+        return GameResults.TIE;
     }
 }
 
