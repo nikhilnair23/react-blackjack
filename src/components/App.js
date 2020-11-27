@@ -1,26 +1,29 @@
 import '../styles/App.css';
 import Deck from './Deck';
 import {PlayingHand} from "./PlayingHand";
-import {useEffect, useReducer} from 'react';
+import {useEffect, useReducer, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {calculateScore, checkScores} from "../utils";
 import {Game, GameResults} from "../constants";
 import {Controls} from "./Controls";
+import {Button, Modal} from "react-bootstrap";
+
 
 
 function App() {
 
     const [state, dispatch] = useReducer(gameReducer, initialState);
-    const {cardDeck, playerHand, dealerHand, playerScore, dealerScore, gameState} = state;
+    const {cardDeck, playerHand, dealerHand, playerScore, dealerScore, gameState, show, message} = state;
+
+    const handleClose = () => dispatch({type: 'CLOSE_MODAL'});
 
     // Checking for a winner every time the player draws a card
     useEffect(() => {
         let result = checkScores(playerScore, dealerScore);
         // If there is a winner
         if (result != GameResults.NO_WINNER && gameState != Game.END) {
-            alert(result);
-            dispatch({type: 'UPDATE_STATE', payload: Game.END})
+            dispatch({type: 'END_GAME', payload: result});
         }
     }, [playerScore]);
 
@@ -72,11 +75,8 @@ function App() {
         }
         dispatch({type: 'UPDATE_DEALER', payload: obj});
         if (gameState != Game.END) {
-            dispatch({type: 'UPDATE_STATE', payload: Game.END})
             let result = checkScores(playerScore, score, Game.END);
-            setTimeout(function () {
-                alert(result);
-            }, 100);
+            dispatch({type: 'END_GAME', payload: result});
         }
     }
 
@@ -111,6 +111,16 @@ function App() {
                 startGame={startGame}
                 reset={reset}
             />
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{message}</Modal.Title>
+                </Modal.Header>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
@@ -129,6 +139,15 @@ function gameReducer(state, action) {
                 playerScore: action.payload.playerScore,
                 dealerScore: action.payload.dealerScore,
                 gameState: Game.STARTED
+            }
+        }
+
+        case 'END_GAME':{
+            return {
+                ...state,
+                gameState: Game.END,
+                show: true,
+                message: action.payload
             }
         }
 
@@ -169,6 +188,14 @@ function gameReducer(state, action) {
                 gameState: Game.INIT
             }
         }
+
+        case 'CLOSE_MODAL': {
+            return{
+                ...state,
+                show: false,
+                message: ''
+            }
+        }
     }
 }
 
@@ -178,5 +205,7 @@ const initialState = {
     dealerHand: [],
     playerScore: 0,
     dealerScore: 0,
-    gameState: Game.INIT
+    gameState: Game.INIT,
+    message: '',
+    show : false
 }
