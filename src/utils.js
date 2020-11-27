@@ -20,7 +20,7 @@ export const calculateScore = (deck) => {
     return score;
 }
 
-//TODO: Fix logic when player chooses to stay
+
 export const checkScores = (playerScore, dealerScore, gameState) => {
     if (gameState === Game.END) {
         return checkWinner(playerScore, dealerScore);
@@ -49,6 +49,7 @@ const checkWinner = (playerScore, dealerScore) => {
     if (dealerScore > 21) {
         return GameResults.PLAYER_WINS
     }
+    // Neither player or dealer have gone past 21
     if (playerScore > dealerScore) {
         return GameResults.PLAYER_WINS
     }

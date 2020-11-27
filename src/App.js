@@ -13,7 +13,7 @@ function App() {
     const [state, dispatch] = useReducer(gameReducer, initialState);
     const {cardDeck, playerHand, dealerHand, playerScore, dealerScore, gameState} = state;
 
-    // Checking for a winner every time the player or dealer draws a card
+    // Checking for a winner every time the player draws a card
     useEffect(() => {
         let result = checkScores(playerScore,dealerScore);
         // If there is a winner
@@ -21,7 +21,7 @@ function App() {
             alert(result);
             dispatch({type: 'UPDATE_STATE', payload: Game.END})
         }
-    },[playerScore,dealerScore]);
+    },[playerScore]);
 
 
     const startGame = () => {
@@ -68,12 +68,12 @@ function App() {
         }
         dispatch({type: 'UPDATE_DEALER', payload:obj});
         if(gameState != Game.END){
+            debugger;
             dispatch({type: 'UPDATE_STATE', payload: Game.END})
-            let result = checkScores(playerScore,dealerScore, Game.END);
+            let result = checkScores(playerScore,score, Game.END);
             setTimeout(function () {
                 alert(result);
             }, 100);
-            // In case there is a winner
         }
     }
 
