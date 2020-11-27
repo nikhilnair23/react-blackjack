@@ -13,3 +13,8 @@ export const GameResults = {
     DEALER_WINS: "Dealer wins! Better luck next time!",
     TIE: "Game ends as a tie"
 }
+
+
+export const modalStyle ={
+    justifyContent: "center",
+}

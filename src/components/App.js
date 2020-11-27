@@ -5,10 +5,10 @@ import {useEffect, useReducer, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {calculateScore, checkScores} from "../utils";
-import {Game, GameResults} from "../constants";
+import {Game, GameResults, modalStyle} from "../constants";
 import {Controls} from "./Controls";
 import {Button, Modal} from "react-bootstrap";
-
+import {ResultModal} from "./ResultModal";
 
 
 function App() {
@@ -89,38 +89,33 @@ function App() {
                     <h2 className="text-white mb-4">Dealer</h2>
                     <PlayingHand
                         gameState={gameState}
-                        hand = {dealerHand}
-                        score = {dealerScore}
+                        hand={dealerHand}
+                        score={dealerScore}
                     />
                 </div>
 
-                </div>
-                <div className="container playing-space mb-3">
-                    <h2 className="text-white mb-4">Player</h2>
-                    <PlayingHand
-                        gameState={gameState}
-                        hand = {playerHand}
-                        score = {playerScore}
-                    />
-                </div>
+            </div>
+            <div className="container playing-space mb-3">
+                <h2 className="text-white mb-4">Player</h2>
+                <PlayingHand
+                    gameState={gameState}
+                    hand={playerHand}
+                    score={playerScore}
+                />
+            </div>
 
             <Controls
                 gameState={gameState}
-                hit = {hit}
-                stay = {stay}
+                hit={hit}
+                stay={stay}
                 startGame={startGame}
                 reset={reset}
             />
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{message}</Modal.Title>
-                </Modal.Header>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <ResultModal
+                show={show}
+                handleClose={handleClose}
+                message={message}
+            />
         </div>
     );
 }
@@ -142,7 +137,8 @@ function gameReducer(state, action) {
             }
         }
 
-        case 'END_GAME':{
+        // Update game state and display modal
+        case 'END_GAME': {
             return {
                 ...state,
                 gameState: Game.END,
@@ -190,7 +186,7 @@ function gameReducer(state, action) {
         }
 
         case 'CLOSE_MODAL': {
-            return{
+            return {
                 ...state,
                 show: false,
                 message: ''
@@ -207,5 +203,7 @@ const initialState = {
     dealerScore: 0,
     gameState: Game.INIT,
     message: '',
-    show : false
+    show: false
 }
+
+
