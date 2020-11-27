@@ -1,4 +1,4 @@
-.playing-card{
+.playing-card-img{
     width: 90px;
     z-index: 1;
 }
@@ -15,8 +15,8 @@
     overflow: visible;
 }
 
-.card {
-    width: 2.5em;
+.playing-card {
+    width: 1.5em;
     border: none;
     background: transparent;
     justify-content: center;
