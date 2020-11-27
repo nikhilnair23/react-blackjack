@@ -17,6 +17,13 @@
   height: 30vh;
 }
 
+.control-space{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 5vh;
+}
+
 .playing-hand{
   display: flex;
   flex-direction: row;

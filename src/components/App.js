@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {calculateScore, checkScores} from "../utils";
 import {Game, GameResults} from "../constants";
+import {Controls} from "./Controls";
 
 
 function App() {
@@ -84,13 +85,15 @@ function App() {
         <div className="App">
             <h1 className="text-danger font-weight-bold p-2">BlackJack</h1>
             <div className="col p-2">
-                <div className="playing-space mb-3">
+                <div className="playing-space">
                     <h2 className="text-white mb-4">Dealer</h2>
                     <PlayingHand
                         gameState={gameState}
                         hand = {dealerHand}
                         score = {dealerScore}
                     />
+                </div>
+
                 </div>
                 <div className="container playing-space mb-3">
                     <h2 className="text-white mb-4">Player</h2>
@@ -101,35 +104,13 @@ function App() {
                     />
                 </div>
 
-                {gameState === Game.STARTED &&
-                <div className="flex-row mb-2">
-                    <div className="btn btn-success mr-2"
-                         onClick={hit}
-                    >
-                        HIT
-                    </div>
-                    <div className="btn btn-danger"
-                         onClick={stay}
-                    >
-                        STAY
-                    </div>
-                </div>
-                }
-
-                {gameState === Game.INIT ?
-                    <div className="btn btn-primary"
-                         onClick={startGame}
-                    >
-                        Start Game
-                    </div>
-                    :
-                    <div className="btn btn-primary"
-                         onClick={reset}
-                    >
-                        Restart
-                    </div>
-                }
-            </div>
+            <Controls
+                gameState={gameState}
+                hit = {hit}
+                stay = {stay}
+                startGame={startGame}
+                reset={reset}
+            />
         </div>
     );
 }
