@@ -1,5 +1,6 @@
 import {suits, values} from './constants'
 
+// TODO: Add method to draw card
 export default class Deck {
 
     static createDeck = () => {

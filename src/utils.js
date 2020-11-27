@@ -20,23 +20,39 @@ export const calculateScore = (deck) => {
     return score;
 }
 
-export const checkWinner = (playerScore, dealerScore, gameState) => {
-    if(playerScore < 21 && dealerScore < 21){
-        return GameResults.NO_WINNER;
-    }else{
-        if (playerScore == 21 && dealerScore == 21) {
-            return GameResults.TIE
+//TODO: Fix logic when player chooses to stay
+export const checkScores = (playerScore, dealerScore, gameState) => {
+    if (gameState === Game.END) {
+        return checkWinner(playerScore, dealerScore);
+    } else {
+        if (playerScore < 21 && dealerScore < 21) {
+            return GameResults.NO_WINNER;
         }
-        else if (playerScore == 21){
-            return GameResults.PLAYER_WINS
-        }else if(dealerScore == 21){
-            return GameResults.DEALER_WINS;
-        }
-        else if(playerScore > 21){
-            return GameResults.DEALER_WINS;
-        }else if(dealerScore > 21){
-            return GameResults.PLAYER_WINS
-        }
+        return checkWinner(playerScore, dealerScore);
+    }
+}
+
+//Helper function to find out who the winner is
+const checkWinner = (playerScore, dealerScore) => {
+    if (playerScore == 21 && dealerScore == 21) {
+        return GameResults.TIE
+    }
+    if (playerScore == 21) {
+        return GameResults.PLAYER_WINS
+    }
+    if (dealerScore == 21) {
+        return GameResults.DEALER_WINS;
+    }
+    if (playerScore > 21) {
+        return GameResults.DEALER_WINS;
+    }
+    if (dealerScore > 21) {
+        return GameResults.PLAYER_WINS
+    }
+    if (playerScore > dealerScore) {
+        return GameResults.PLAYER_WINS
+    } else {
+        return GameResults.DEALER_WINS;
     }
 }
 

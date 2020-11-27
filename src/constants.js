@@ -8,7 +8,7 @@ export const Game = {
 }
 
 export const GameResults = {
-    NO_WINNER: "No winner",
+    NO_WINNER: "No winner yet",
     PLAYER_WINS: "Congrats you won",
     DEALER_WINS: "Dealer wins! Better luck next time!",
     TIE: "Game ends as a tie"

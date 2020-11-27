@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Card} from "./Card";
 import 'bootstrap/dist/css/bootstrap.css';
-import {calculateScore, checkWinner} from "./utils";
+import {calculateScore, checkScores} from "./utils";
 import {Game, GameResults} from "./constants";
 
 
@@ -18,9 +18,9 @@ function App() {
     const [gameState, setGameState] = useState(Game.INIT);
 
     useEffect(() => {
-        let result = checkWinner(playerScore,dealerScore, setGameState);
+        let result = checkScores(playerScore,dealerScore, setGameState);
         // In case there is a winner
-        if(result != GameResults.NO_WINNER){
+        if(result != GameResults.NO_WINNER && gameState != Game.END){
             alert(result);
             setGameState(Game.END);
         }
@@ -69,14 +69,12 @@ function App() {
         setDealerHand([...hand]);
         setDeck(cardDeck);
         if(gameState != Game.END){
-            let result = checkWinner(playerScore,dealerScore, setGameState);
+            setGameState(Game.END);
+            let result = checkScores(playerScore,dealerScore, Game.END);
+            setTimeout(function () {
+                alert(result);
+            }, 100);
             // In case there is a winner
-            if(result != GameResults.NO_WINNER){
-                setGameState(Game.END);
-                setTimeout(function () {
-                    alert(result);
-                }, 2000);
-            }
         }
     }
 
