@@ -10,7 +10,6 @@ export default class Deck {
                 deck.push(card);
             }
         }
-        console.log(deck);
         return deck;
     }
 

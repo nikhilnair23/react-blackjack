@@ -5,27 +5,32 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Card} from "./Card";
 import 'bootstrap/dist/css/bootstrap.css';
 import {calculateScore, checkWinner} from "./utils";
-import {game} from "./constants";
+import {Game, GameResults} from "./constants";
 
 
 function App() {
 
-    const [currDeck, setDeck] = useState([]);
+    const [cardDeck, setDeck] = useState([]);
     const [playerScore, setPlayerScore] = useState(0);
     const [dealerScore, setDealerScore] = useState(0);
     const [playerHand, setPlayerHand] = useState([]);
     const [dealerHand, setDealerHand] = useState([]);
-    const [gameState, setGameState] = useState(game.INIT);
+    const [gameState, setGameState] = useState(Game.INIT);
 
     useEffect(() => {
-        checkWinner(playerScore,dealerScore, setGameState);
-    },[playerScore,dealerScore])
+        let result = checkWinner(playerScore,dealerScore, setGameState);
+        // In case there is a winner
+        if(result != GameResults.NO_WINNER){
+            alert(result);
+            setGameState(Game.END);
+        }
+    },[playerScore,dealerScore]);
+
 
     const startGame = () => {
         let deck = Deck.createDeck();
         deck = Deck.shuffle(deck);
-        setDeck(deck);
-        setGameState(game.STARTED);
+        setGameState(Game.STARTED);
         let dealer = deck.splice(0, 2);
         let player = deck.splice(0, 2);
         setDealerHand(dealer);
@@ -37,7 +42,7 @@ function App() {
 
     const reset = () => {
         setDeck([]);
-        setGameState(game.INIT);
+        setGameState(Game.INIT);
         setPlayerHand([]);
         setDealerHand([]);
         setPlayerScore(0);
@@ -46,19 +51,42 @@ function App() {
 
     const dealCard = () => {
         let hand = playerHand;
-        let card = currDeck.pop();
+        let card = cardDeck.pop();
         hand.push(card);
         setPlayerHand([...hand]);
-        setDeck(currDeck);
+        setDeck(cardDeck);
         setPlayerScore(calculateScore(playerHand));
+    }
+
+    const stay = () => {
+        let score = dealerScore;
+        let hand = dealerHand;
+        while(score <=17){
+            hand.push(cardDeck.pop());
+            score = calculateScore(hand);
+        }
+        setDealerScore(score);
+        setDealerHand([...hand]);
+        setDeck(cardDeck);
+        if(gameState != Game.END){
+            let result = checkWinner(playerScore,dealerScore, setGameState);
+            // In case there is a winner
+            if(result != GameResults.NO_WINNER){
+                setGameState(Game.END);
+                setTimeout(function () {
+                    alert(result);
+                }, 2000);
+            }
+        }
     }
 
 
     return (
         <div className="App">
+            <h1 className="text-danger font-weight-bold p-4">BlackJack</h1>
             <div className="col p-4">
                 <div className="playing-space">
-                    <h3>Dealer</h3>
+                    <h2 className="text-white">Dealer</h2>
                     <h3>Dealer Score: <span>{dealerScore}</span></h3>
                     <div className="playing-hand">
                         {dealerHand.map((card, index) =>
@@ -68,7 +96,7 @@ function App() {
                     </div>
                 </div>
                 <div className="playing-space">
-                    <h3>Player</h3>
+                    <h2 className="text-white">Player</h2>
                     <h3>Player Score: <span>{playerScore}</span></h3>
                     <div className="playing-hand">
                         {playerHand.map((card, index) =>
@@ -78,20 +106,22 @@ function App() {
                     </div>
                 </div>
 
-                {gameState === game.STARTED &&
+                {gameState === Game.STARTED &&
                 <div className="flex-row mb-2">
                     <div className="btn btn-success mr-2"
                          onClick={dealCard}
                     >
                         HIT
                     </div>
-                    <div className="btn btn-danger">
+                    <div className="btn btn-danger"
+                         onClick={stay}
+                    >
                         STAY
                     </div>
                 </div>
                 }
 
-                {gameState === game.INIT ?
+                {gameState === Game.INIT ?
                     <div className="btn btn-primary"
                          onClick={startGame}
                     >

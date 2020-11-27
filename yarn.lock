@@ -1231,7 +1231,7 @@
   dependencies:
     "@jest/console" "^26.6.2"
     "@jest/reporters" "^26.6.2"
-    "@jest/test-result" "^26.6.2"
+    "@jest/test-GameResults" "^26.6.2"
     "@jest/transform" "^26.6.2"
     "@jest/types" "^26.6.2"
     "@types/node" "*"
@@ -1296,7 +1296,7 @@
   dependencies:
     "@bcoe/v8-coverage" "^0.2.3"
     "@jest/console" "^26.6.2"
-    "@jest/test-result" "^26.6.2"
+    "@jest/test-GameResults" "^26.6.2"
     "@jest/transform" "^26.6.2"
     "@jest/types" "^26.6.2"
     chalk "^4.0.0"
@@ -1330,9 +1330,9 @@
     graceful-fs "^4.2.4"
     source-map "^0.6.0"
 
-"@jest/test-result@^26.6.0", "@jest/test-result@^26.6.2":
+"@jest/test-GameResults@^26.6.0", "@jest/test-GameResults@^26.6.2":
   version "26.6.2"
-  resolved "https://registry.yarnpkg.com/@jest/test-result/-/test-result-26.6.2.tgz#55da58b62df134576cc95476efa5f7949e3f5f18"
+  resolved "https://registry.yarnpkg.com/@jest/test-GameResults/-/test-GameResults-26.6.2.tgz#55da58b62df134576cc95476efa5f7949e3f5f18"
   integrity sha512-5O7H5c/7YlojphYNrK02LlDIV2GNPYisKwHm2QTKjNZeEzezCbwYs9swJySv2UfPMyZ0VdsmMv7jIlD/IKYQpQ==
   dependencies:
     "@jest/console" "^26.6.2"
@@ -1345,7 +1345,7 @@
   resolved "https://registry.yarnpkg.com/@jest/test-sequencer/-/test-sequencer-26.6.3.tgz#98e8a45100863886d074205e8ffdc5a7eb582b17"
   integrity sha512-YHlVIjP5nfEyjlrSr8t/YdNfU/1XEt7c5b4OxcXCjyRhjzLYu/rO69/WHPuYcbCWkz8kAeZVZp2N2+IOLLEPGw==
   dependencies:
-    "@jest/test-result" "^26.6.2"
+    "@jest/test-GameResults" "^26.6.2"
     graceful-fs "^4.2.4"
     jest-haste-map "^26.6.2"
     jest-runner "^26.6.3"
@@ -6151,7 +6151,7 @@ jest-circus@26.6.0:
   dependencies:
     "@babel/traverse" "^7.1.0"
     "@jest/environment" "^26.6.0"
-    "@jest/test-result" "^26.6.0"
+    "@jest/test-GameResults" "^26.6.0"
     "@jest/types" "^26.6.0"
     "@types/babel__traverse" "^7.0.4"
     "@types/node" "*"
@@ -6177,7 +6177,7 @@ jest-cli@^26.6.0:
   integrity sha512-GF9noBSa9t08pSyl3CY4frMrqp+aQXFGFkf5hEPbh/pIUFYWMK6ZLTfbmadxJVcJrdRoChlWQsA2VkJcDFK8hg==
   dependencies:
     "@jest/core" "^26.6.3"
-    "@jest/test-result" "^26.6.2"
+    "@jest/test-GameResults" "^26.6.2"
     "@jest/types" "^26.6.2"
     chalk "^4.0.0"
     exit "^0.1.2"
@@ -6301,7 +6301,7 @@ jest-jasmine2@^26.6.3:
     "@babel/traverse" "^7.1.0"
     "@jest/environment" "^26.6.2"
     "@jest/source-map" "^26.6.2"
-    "@jest/test-result" "^26.6.2"
+    "@jest/test-GameResults" "^26.6.2"
     "@jest/types" "^26.6.2"
     "@types/node" "*"
     chalk "^4.0.0"
@@ -6412,7 +6412,7 @@ jest-runner@^26.6.0, jest-runner@^26.6.3:
   dependencies:
     "@jest/console" "^26.6.2"
     "@jest/environment" "^26.6.2"
-    "@jest/test-result" "^26.6.2"
+    "@jest/test-GameResults" "^26.6.2"
     "@jest/types" "^26.6.2"
     "@types/node" "*"
     chalk "^4.0.0"
@@ -6441,7 +6441,7 @@ jest-runtime@^26.6.0, jest-runtime@^26.6.3:
     "@jest/fake-timers" "^26.6.2"
     "@jest/globals" "^26.6.2"
     "@jest/source-map" "^26.6.2"
-    "@jest/test-result" "^26.6.2"
+    "@jest/test-GameResults" "^26.6.2"
     "@jest/transform" "^26.6.2"
     "@jest/types" "^26.6.2"
     "@types/yargs" "^15.0.0"
@@ -6536,7 +6536,7 @@ jest-watcher@^26.3.0, jest-watcher@^26.6.2:
   resolved "https://registry.yarnpkg.com/jest-watcher/-/jest-watcher-26.6.2.tgz#a5b683b8f9d68dbcb1d7dae32172d2cca0592975"
   integrity sha512-WKJob0P/Em2csiVthsI68p6aGKTIcsfjH9Gsx1f0A3Italz43e3ho0geSAVsmj09RWOELP1AZ/DXyJgOgDKxXQ==
   dependencies:
-    "@jest/test-result" "^26.6.2"
+    "@jest/test-GameResults" "^26.6.2"
     "@jest/types" "^26.6.2"
     "@types/node" "*"
     ansi-escapes "^4.2.1"
