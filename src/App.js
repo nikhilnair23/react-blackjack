@@ -1,6 +1,6 @@
 import './App.css';
 import Deck from './Deck';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useReducer} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Card} from "./Card";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -10,19 +10,16 @@ import {Game, GameResults} from "./constants";
 
 function App() {
 
-    const [cardDeck, setDeck] = useState([]);
-    const [playerScore, setPlayerScore] = useState(0);
-    const [dealerScore, setDealerScore] = useState(0);
-    const [playerHand, setPlayerHand] = useState([]);
-    const [dealerHand, setDealerHand] = useState([]);
-    const [gameState, setGameState] = useState(Game.INIT);
+    const [state, dispatch] = useReducer(gameReducer, initialState);
+    const {cardDeck, playerHand, dealerHand, playerScore, dealerScore, gameState} = state;
 
+    // Checking for a winner every time the player or dealer draws a card
     useEffect(() => {
-        let result = checkScores(playerScore,dealerScore, setGameState);
-        // In case there is a winner
+        let result = checkScores(playerScore,dealerScore);
+        // If there is a winner
         if(result != GameResults.NO_WINNER && gameState != Game.END){
             alert(result);
-            setGameState(Game.END);
+            dispatch({type: 'UPDATE_STATE', payload: Game.END})
         }
     },[playerScore,dealerScore]);
 
@@ -30,46 +27,48 @@ function App() {
     const startGame = () => {
         let deck = Deck.createDeck();
         deck = Deck.shuffle(deck);
-        setGameState(Game.STARTED);
         let dealer = deck.splice(0, 2);
         let player = deck.splice(0, 2);
-        setDealerHand(dealer);
-        setPlayerHand(player);
-        setDealerScore(calculateScore(dealer));
-        setPlayerScore(calculateScore(player));
-        setDeck(deck);
+        let obj = {
+            deck: deck,
+            playerHand: player,
+            dealerHand: dealer,
+            dealerScore: calculateScore(dealer),
+            playerScore: calculateScore(player),
+        }
+        dispatch({type: 'START_GAME', payload: obj})
     }
 
     const reset = () => {
-        setDeck([]);
-        setGameState(Game.INIT);
-        setPlayerHand([]);
-        setDealerHand([]);
-        setPlayerScore(0);
-        setDealerScore(0);
+        dispatch({type: 'RESET'});
     }
 
-    const dealCard = () => {
-        let hand = playerHand;
+    const hit = () => {
         let card = cardDeck.pop();
-        hand.push(card);
-        setPlayerHand([...hand]);
-        setDeck(cardDeck);
-        setPlayerScore(calculateScore(playerHand));
+        playerHand.push(card);
+        let obj = {
+            deck: cardDeck,
+            playerHand: playerHand,
+            playerScore: calculateScore(playerHand)
+        }
+        dispatch({type: 'UPDATE_PLAYER', payload: obj});
     }
 
     const stay = () => {
         let score = dealerScore;
-        let hand = dealerHand;
         while(score <=17){
-            hand.push(cardDeck.pop());
-            score = calculateScore(hand);
+            dealerHand.push(cardDeck.pop());
+            score = calculateScore(dealerHand);
         }
-        setDealerScore(score);
-        setDealerHand([...hand]);
-        setDeck(cardDeck);
+
+        let obj = {
+            deck: cardDeck,
+            dealerHand: dealerHand,
+            dealerScore: score
+        }
+        dispatch({type: 'UPDATE_DEALER', payload:obj});
         if(gameState != Game.END){
-            setGameState(Game.END);
+            dispatch({type: 'UPDATE_STATE', payload: Game.END})
             let result = checkScores(playerScore,dealerScore, Game.END);
             setTimeout(function () {
                 alert(result);
@@ -107,7 +106,7 @@ function App() {
                 {gameState === Game.STARTED &&
                 <div className="flex-row mb-2">
                     <div className="btn btn-success mr-2"
-                         onClick={dealCard}
+                         onClick={hit}
                     >
                         HIT
                     </div>
@@ -138,3 +137,71 @@ function App() {
 }
 
 export default App;
+
+function gameReducer(state,action){
+    switch(action.type){
+        // Setting data at the start of a new game
+        case 'START_GAME':
+        {
+            return {
+                ...state,
+                cardDeck : action.payload.deck,
+                playerHand: action.payload.playerHand,
+                dealerHand: action.payload.dealerHand,
+                playerScore: action.payload.playerScore,
+                dealerScore: action.payload.dealerScore,
+                gameState: Game.STARTED
+            }
+        }
+
+        case 'UPDATE_STATE':
+        {
+            return {
+                ...state,
+                gameState: action.payload
+            }
+        }
+        // Update state when a player "hits"
+        case 'UPDATE_PLAYER':
+        {
+            return{
+                ...state,
+                cardDeck : action.payload.deck,
+                playerHand: action.payload.playerHand,
+                playerScore: action.payload.playerScore,
+            }
+        }
+        // Update state when dealer is drawing cards
+        case 'UPDATE_DEALER':
+        {
+            return{
+                ...state,
+                cardDeck : action.payload.deck,
+                dealerHand: action.payload.dealerHand,
+                dealerScore: action.payload.dealerScore,
+            }
+        }
+        // Reset state to initial state
+        case 'RESET':
+        {
+            return {
+                ...state,
+                cardDeck : [],
+                playerHand: [],
+                dealerHand: [],
+                playerScore: 0,
+                dealerScore: 0,
+                gameState: Game.INIT
+            }
+        }
+    }
+}
+
+const initialState = {
+    cardDeck : [],
+    playerHand: [],
+    dealerHand: [],
+    playerScore: 0,
+    dealerScore: 0,
+    gameState: Game.INIT
+}
