@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Card} from "./Card";
 import 'bootstrap/dist/css/bootstrap.css';
-import {calculateScore} from "./utils";
+import {calculateScore, checkWinner} from "./utils";
 import {game} from "./constants";
 
 
@@ -18,7 +18,7 @@ function App() {
     const [gameState, setGameState] = useState(game.INIT);
 
     useEffect(() => {
-        checkWinner();
+        checkWinner(playerScore,dealerScore, setGameState);
     },[playerScore,dealerScore])
 
     const startGame = () => {
@@ -51,28 +51,6 @@ function App() {
         setPlayerHand([...hand]);
         setDeck(currDeck);
         setPlayerScore(calculateScore(playerHand));
-    }
-
-    const checkWinner = () => {
-        if(playerScore < 21 && dealerScore < 21){
-
-        }else{
-            if (playerScore == 21 && dealerScore == 21) {
-
-            }
-            else if (playerScore == 21){
-                alert("Player Wins");
-            }else if(dealerScore == 21){
-                alert("Dealer Wins");
-            }
-            else if(playerScore > 21){
-                alert("Dealer Wins");
-            }else if(dealerScore > 21){
-                alert("Player wins");
-            }
-            setGameState(game.END);
-        }
-
     }
 
 

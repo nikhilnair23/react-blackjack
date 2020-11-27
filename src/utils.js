@@ -1,4 +1,4 @@
-import {values} from './constants'
+import {game, values} from './constants'
 
 export const calculateScore = (deck) => {
     let hasAce = false;
@@ -20,8 +20,25 @@ export const calculateScore = (deck) => {
     return score;
 }
 
-export const checkWinner = () => {
+export const checkWinner = (playerScore, dealerScore, setGameState) => {
+    if(playerScore < 21 && dealerScore < 21){
 
+    }else{
+        if (playerScore == 21 && dealerScore == 21) {
+
+        }
+        else if (playerScore == 21){
+            alert("Player Wins");
+        }else if(dealerScore == 21){
+            alert("Dealer Wins");
+        }
+        else if(playerScore > 21){
+            alert("Dealer Wins");
+        }else if(dealerScore > 21){
+            alert("Player wins");
+        }
+        setGameState(game.END);
+    }
 }
 
 
