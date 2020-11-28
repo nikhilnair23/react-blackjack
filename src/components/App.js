@@ -103,9 +103,8 @@ function App() {
     return (
         <div className="App">
             <h1 className="text-danger font-weight-bold p-2">BlackJack</h1>
-
             <div className="col p-2">
-                <div className="playing-space">
+                <div className="container playing-space">
                     <h2 className="text-white mb-4">Dealer</h2>
                     <PlayingHand
                         gameState={gameState}
@@ -116,7 +115,7 @@ function App() {
             </div>
 
 
-            <div className="control-space mb-2">
+            <div className="control-space mb-4">
                 <Controls
                     gameState={gameState}
                     hit={hit}
