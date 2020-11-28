@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {calculateScore, checkScores} from "../utils";
 import {Game, GameResults, modalStyle} from "../constants";
 import {Controls} from "./Controls";
-import {Button, Modal} from "react-bootstrap";
 import {ResultModal} from "./ResultModal";
 
 
@@ -95,6 +94,15 @@ function App() {
                 </div>
 
             </div>
+            <Controls
+                gameState={gameState}
+                hit={hit}
+                stay={stay}
+                startGame={startGame}
+                reset={reset}
+            />
+
+
             <div className="container playing-space mb-3">
                 <h2 className="text-white mb-4">Player</h2>
                 <PlayingHand
@@ -104,18 +112,27 @@ function App() {
                 />
             </div>
 
-            <Controls
-                gameState={gameState}
-                hit={hit}
-                stay={stay}
-                startGame={startGame}
-                reset={reset}
-            />
+
             <ResultModal
                 show={show}
                 handleClose={handleClose}
                 message={message}
             />
+            <div className="">
+                {gameState === Game.INIT ?
+                    <div className="btn btn btn-primary gradient"
+                         onClick={startGame}
+                    >
+                        Start Game
+                    </div>
+                    :
+                    <div className="btn btn btn-primary gradient"
+                         onClick={reset}
+                    >
+                        Restart
+                    </div>
+                }
+            </div>
         </div>
     );
 }

@@ -6,12 +6,12 @@ export const Controls = ({gameState, hit, stay, startGame, reset}) =>
         <div className="control-space mb-2">
             {gameState === Game.STARTED &&
             <>
-                <div className="btn btn-success mr-2"
+                <div className="circle-btn green mr-6"
                      onClick={hit}
                 >
                     HIT
                 </div>
-                <div className="btn btn-danger"
+                <div className="circle-btn red"
                      onClick={stay}
                 >
                     STAY
@@ -19,19 +19,6 @@ export const Controls = ({gameState, hit, stay, startGame, reset}) =>
             </>
             }
         </div>
-        <div className="d-flex flex-row justify-content-center">
-            {gameState === Game.INIT ?
-                <div className="btn btn-primary"
-                     onClick={startGame}
-                >
-                    Start Game
-                </div>
-                :
-                <div className="btn btn-primary"
-                     onClick={reset}
-                >
-                    Restart
-                </div>
-            }
-        </div>
+
+
     </>
