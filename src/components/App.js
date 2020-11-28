@@ -18,8 +18,10 @@ function App() {
     // Initializing reducer with initial state
     const [state, dispatch] = useReducer(gameReducer, initialState);
 
+    // Getting all the actions and storing them in the actions const
     const actions = gameActions(dispatch);
 
+    // State variables
     const {playerHand, dealerHand, playerScore, dealerScore, gameState, show, message} = state;
 
     // Function to close the modal
@@ -34,9 +36,7 @@ function App() {
         }
     }, [playerScore]);
 
-    /**
-     * Helper function to start the game. Involves drawing two cards for the dealer and player and then updating state
-     */
+    // Helper function to start the game. Involves drawing two cards for the dealer and player and then updating state
     const startGame = () => {
         Deck.createDeck();
         Deck.shuffle();
@@ -62,19 +62,19 @@ function App() {
         actions.startGame(obj);
     }
 
-    // Function to reset the game by dispatching the 'RESET' action type
+    // Function to reset the game by dispatching the 'reset' action
     const reset = () => {
         actions.reset();
     }
 
     // Function called when the user chooses to "Hit". A card is added to the players hand and the state is updated
     const hit = () => {
-        debugger;
         playerHand.push(Deck.drawCard());
         let obj = {
             playerHand: playerHand,
             playerScore: calculateScore(playerHand)
         }
+        // dispatching the update player action
         actions.updatePlayer(obj);
     }
 
