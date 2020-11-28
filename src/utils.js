@@ -1,6 +1,7 @@
 import {Game, GameResults, values} from './constants'
 
 export const calculateScore = (deck) => {
+    debugger;
     let hasAce = false;
     let score = 0;
     for (let i = 0; i < deck.length; i++) {
@@ -32,7 +33,10 @@ export const checkScores = (playerScore, dealerScore, gameState) => {
     }
 }
 
-//Helper function to find out who the winner is
+/**
+ * Helper function to find the winner. The below rules boil down to whoever gets 21 or is closest to 21 wins.
+ * If a player's score goes above 21 they lose.
+ */
 const checkWinner = (playerScore, dealerScore) => {
     if (playerScore == 21 && dealerScore == 21) {
         return GameResults.TIE
@@ -49,7 +53,7 @@ const checkWinner = (playerScore, dealerScore) => {
     if (dealerScore > 21) {
         return GameResults.PLAYER_WINS
     }
-    // Neither player or dealer have gone past 21
+    // Neither player or dealer have gone past 21 or got 21, so now we have to compare values
     if (playerScore > dealerScore) {
         return GameResults.PLAYER_WINS
     }

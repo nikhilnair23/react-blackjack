@@ -11,16 +11,16 @@ import {ResultModal} from "./ResultModal";
 import {gameActions} from "../actions/gameActions";
 import {gameReducer} from "../reducers/gameReducer";
 
+// Creating an instance of the Deck object
+const Deck = new CardDeck();
 
 function App() {
-    // Creating an instance of the deck
-    const Deck = new CardDeck();
     // Initializing reducer with initial state
     const [state, dispatch] = useReducer(gameReducer, initialState);
 
     const actions = gameActions(dispatch);
 
-    const {cardDeck, playerHand, dealerHand, playerScore, dealerScore, gameState, show, message} = state;
+    const {playerHand, dealerHand, playerScore, dealerScore, gameState, show, message} = state;
 
     // Function to close the modal
     const handleClose = () => actions.closeModal();
@@ -69,8 +69,8 @@ function App() {
 
     // Function called when the user chooses to "Hit". A card is added to the players hand and the state is updated
     const hit = () => {
-        let card = cardDeck.pop();
-        playerHand.push(card);
+        debugger;
+        playerHand.push(Deck.drawCard());
         let obj = {
             playerHand: playerHand,
             playerScore: calculateScore(playerHand)
@@ -82,7 +82,7 @@ function App() {
     const stay = () => {
         let score = dealerScore;
         while (score <= 17) {
-            dealerHand.push(cardDeck.pop());
+            dealerHand.push(Deck.drawCard());
             score = calculateScore(dealerHand);
         }
 
@@ -102,6 +102,7 @@ function App() {
     return (
         <div className="App">
             <h1 className="text-danger font-weight-bold p-2">BlackJack</h1>
+
             <div className="col p-2">
                 <div className="playing-space">
                     <h2 className="text-white mb-4">Dealer</h2>
@@ -111,8 +112,8 @@ function App() {
                         score={dealerScore}
                     />
                 </div>
-
             </div>
+
             <Controls
                 gameState={gameState}
                 hit={hit}
@@ -120,7 +121,6 @@ function App() {
                 startGame={startGame}
                 reset={reset}
             />
-
 
             <div className="container playing-space mb-3">
                 <h2 className="text-white mb-4">Player</h2>
@@ -131,21 +131,21 @@ function App() {
                 />
             </div>
 
-
             <ResultModal
                 show={show}
                 handleClose={handleClose}
                 message={message}
             />
+
             <div className="">
                 {gameState === Game.INIT ?
-                    <div className="btn btn-lg btn-primary gradient"
+                    <div className="btn btn-lg btn-primary"
                          onClick={startGame}
                     >
                         Start Game
                     </div>
                     :
-                    <div className="btn btn-lg btn-primary gradient"
+                    <div className="btn btn-lg btn-primary"
                          onClick={reset}
                     >
                         Restart

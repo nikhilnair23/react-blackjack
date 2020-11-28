@@ -1,7 +1,6 @@
 import {Game} from "../constants";
 
 export const gameReducer = (state, action) => {
-    debugger;
     switch (action.type) {
         // Setting data at the start of a new game
         case 'startGame': {
