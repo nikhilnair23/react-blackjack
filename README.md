@@ -22,11 +22,10 @@ This application was built with:
 
 1. Clone the repository to your local environment
 2. In the root folder, open a terminal and enter the command:
-### `npm install`
+#### `npm install`
 3. To run the app, enter the command:
-### `npm start`
+#### `npm start`
 4. The app should automatically open your browser. If not, open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-### `yarn start`
 
 ## How to play the game
 The rules are pretty simple: 
