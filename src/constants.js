@@ -20,3 +20,13 @@ export const GameResults = {
 export const modalStyle ={
     justifyContent: "center",
 }
+
+export const initialState = {
+    playerHand: [],
+    dealerHand: [],
+    playerScore: 0,
+    dealerScore: 0,
+    gameState: Game.INIT,
+    message: '',
+    show: false
+}

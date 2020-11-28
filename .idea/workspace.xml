@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4a3725b-1371-4c59-86a7-7ce3b130504e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/actions/gameActions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/reducers/gameReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Deck.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Deck.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/App.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +27,7 @@
         <counts>
           <entry key="css" value="7" />
           <entry key="gitignore" value="1" />
-          <entry key="js" value="31" />
+          <entry key="js" value="36" />
           <entry key="json" value="2" />
           <entry key="png" value="7" />
           <entry key="svg" value="1" />
@@ -40,7 +38,7 @@
           <entry key="CSS" value="7" />
           <entry key="Image" value="7" />
           <entry key="JSON" value="2" />
-          <entry key="JavaScript" value="31" />
+          <entry key="JavaScript" value="36" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="SVG" value="1" />
         </counts>
@@ -53,15 +51,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="756" />
-          <entry key="js" value="9951" />
-          <entry key="txt" value="740" />
+          <entry key="js" value="11007" />
+          <entry key="txt" value="816" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="756" />
-          <entry key="JavaScript" value="9951" />
-          <entry key="PLAIN_TEXT" value="740" />
+          <entry key="JavaScript" value="11007" />
+          <entry key="PLAIN_TEXT" value="816" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -78,11 +76,20 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/components/App.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="727">
-                  <caret line="182" column="20" lean-forward="true" selection-start-line="182" selection-start-column="20" selection-end-line="182" selection-end-column="20" />
+                <state relative-caret-position="572">
+                  <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
                   <folding>
                     <element signature="e#0#27#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/actions/gameActions.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="60">
+                  <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
                 </state>
               </provider>
             </entry>
@@ -129,19 +136,19 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/constants.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="330">
-                  <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-                </state>
-              </provider>
-            </entry>
-          </file>
         </leaf>
       </split-first>
       <split-second>
         <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/reducers/gameReducer.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="45">
+                  <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/components/Controls.js">
               <provider selected="true" editor-type-id="text-editor">
@@ -154,7 +161,16 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/constants.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="375">
+                  <caret line="25" column="19" lean-forward="true" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/styles/App.css">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="220">
@@ -206,6 +222,7 @@
     <findStrings>
       <find>UPDATE_STATE</find>
       <find>alert</find>
+      <find>deck</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -240,7 +257,10 @@
         <option value="$PROJECT_DIR$/src/styles/Card.css" />
         <option value="$PROJECT_DIR$/src/styles/App.css" />
         <option value="$PROJECT_DIR$/src/components/Deck.js" />
+        <option value="$PROJECT_DIR$/src/reducers/GameReducer.js" />
         <option value="$PROJECT_DIR$/src/constants.js" />
+        <option value="$PROJECT_DIR$/src/reducers/gameReducer.js" />
+        <option value="$PROJECT_DIR$/src/actions/gameActions.js" />
         <option value="$PROJECT_DIR$/src/components/App.js" />
       </list>
     </option>
@@ -294,7 +314,7 @@
               <item name="blackjack" type="b2602c69:ProjectViewProjectNode" />
               <item name="blackjack" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="reducers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -343,7 +363,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606363509580</updated>
-      <workItem from="1606363512220" duration="46019000" />
+      <workItem from="1606363512220" duration="48382000" />
     </task>
     <task id="LOCAL-00001" summary="Created a deck class">
       <created>1606368899506</created>
@@ -506,11 +526,18 @@
       <option name="project" value="LOCAL" />
       <updated>1606522597407</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Added some methods to the deck class and added comments">
+      <created>1606525044455</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1606525044455</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46019000" />
+    <option name="totallyTimeSpent" value="48382000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="-67" width="1920" height="1080" extended-state="0" />
@@ -606,7 +633,8 @@
     <MESSAGE value="Moved modal to seperate component" />
     <MESSAGE value="Styled the buttons" />
     <MESSAGE value="Added more styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added more styling" />
+    <MESSAGE value="Added some methods to the deck class and added comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added some methods to the deck class and added comments" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/logo.svg">
@@ -755,15 +783,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/constants.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="375">
+          <caret line="25" column="19" lean-forward="true" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/gameReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/gameActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="727">
-          <caret line="182" column="20" lean-forward="true" selection-start-line="182" selection-start-column="20" selection-end-line="182" selection-end-column="20" />
+        <state relative-caret-position="572">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>

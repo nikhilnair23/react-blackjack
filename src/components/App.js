@@ -4,10 +4,12 @@ import {useEffect, useReducer} from 'react';
 import {calculateScore, checkScores} from "../utils";
 
 import CardDeck from './Deck';
-import {Game, GameResults} from "../constants";
+import {Game, GameResults, initialState} from "../constants";
 import {PlayingHand} from "./PlayingHand";
 import {Controls} from "./Controls";
 import {ResultModal} from "./ResultModal";
+import {gameActions} from "../actions/gameActions";
+import {gameReducer} from "../reducers/gameReducer";
 
 
 function App() {
@@ -16,42 +18,53 @@ function App() {
     // Initializing reducer with initial state
     const [state, dispatch] = useReducer(gameReducer, initialState);
 
+    const actions = gameActions(dispatch);
+
     const {cardDeck, playerHand, dealerHand, playerScore, dealerScore, gameState, show, message} = state;
+
     // Function to close the modal
-    const handleClose = () => dispatch({type: 'CLOSE_MODAL'});
+    const handleClose = () => actions.closeModal();
 
     // Checking for a winner every time the player draws a card (i.e) playerScore changes
     useEffect(() => {
         let result = checkScores(playerScore, dealerScore);
-        // If there is a winner
+        // If there is a winner/tie dispatch 'END_GAME' action and display modal
         if (result != GameResults.NO_WINNER && gameState != Game.END) {
-            dispatch({type: 'END_GAME', payload: result});
+            actions.endGame(result);
         }
     }, [playerScore]);
 
     /**
-     * Helper function to start the game. Involves drawing two cards for dealer and player and then dispatching
-     * the updated data to the reducer
+     * Helper function to start the game. Involves drawing two cards for the dealer and player and then updating state
      */
     const startGame = () => {
         Deck.createDeck();
         Deck.shuffle();
-        let deck = Deck.getDeck();
-        let dealer = deck.splice(0, 2);
-        let player = deck.splice(0, 2);
-        let obj = {
-            deck: deck,
-            playerHand: player,
-            dealerHand: dealer,
-            dealerScore: calculateScore(dealer),
-            playerScore: calculateScore(player),
+        let dealerTurn = true;
+        let dealerHand =[];
+        let playerHand = [];
+        // Alternate dealing cards between dealer and player
+        for(let i=0 ;i<4 ;i++){
+            if (dealerTurn){
+                dealerHand.push(Deck.drawCard());
+                dealerTurn = false;
+            }else{
+                playerHand.push(Deck.drawCard());
+                dealerTurn = true;
+            }
         }
-        dispatch({type: 'START_GAME', payload: obj})
+        let obj = {
+            playerHand: playerHand,
+            dealerHand: dealerHand,
+            dealerScore: calculateScore(dealerHand),
+            playerScore: calculateScore(playerHand),
+        }
+        actions.startGame(obj);
     }
 
     // Function to reset the game by dispatching the 'RESET' action type
     const reset = () => {
-        dispatch({type: 'RESET'});
+        actions.reset();
     }
 
     // Function called when the user chooses to "Hit". A card is added to the players hand and the state is updated
@@ -59,11 +72,10 @@ function App() {
         let card = cardDeck.pop();
         playerHand.push(card);
         let obj = {
-            deck: cardDeck,
             playerHand: playerHand,
             playerScore: calculateScore(playerHand)
         }
-        dispatch({type: 'UPDATE_PLAYER', payload: obj});
+        actions.updatePlayer(obj);
     }
 
     // When user chooses to stay, dealer draws cards until their score is 17 and the state is then updated
@@ -75,14 +87,14 @@ function App() {
         }
 
         let obj = {
-            deck: cardDeck,
             dealerHand: dealerHand,
             dealerScore: score
         }
-        dispatch({type: 'UPDATE_DEALER', payload: obj});
+        actions.updateDealer(obj);
+        // If the game hasn't ended
         if (gameState != Game.END) {
             let result = checkScores(playerScore, score, Game.END);
-            dispatch({type: 'END_GAME', payload: result});
+            actions.endGame(result);
         }
     }
 
@@ -145,89 +157,5 @@ function App() {
 }
 
 export default App;
-
-function gameReducer(state, action) {
-    switch (action.type) {
-        // Setting data at the start of a new game
-        case 'START_GAME': {
-            return {
-                ...state,
-                cardDeck: action.payload.deck,
-                playerHand: action.payload.playerHand,
-                dealerHand: action.payload.dealerHand,
-                playerScore: action.payload.playerScore,
-                dealerScore: action.payload.dealerScore,
-                gameState: Game.STARTED
-            }
-        }
-
-        // Update game state and display modal
-        case 'END_GAME': {
-            return {
-                ...state,
-                gameState: Game.END,
-                show: true,
-                message: action.payload
-            }
-        }
-
-        // Update Game state
-        case 'UPDATE_STATE': {
-            return {
-                ...state,
-                gameState: action.payload
-            }
-        }
-        // Update state when a player "hits"
-        case 'UPDATE_PLAYER': {
-            return {
-                ...state,
-                cardDeck: action.payload.deck,
-                playerHand: action.payload.playerHand,
-                playerScore: action.payload.playerScore,
-            }
-        }
-        // Update state when dealer is drawing cards
-        case 'UPDATE_DEALER': {
-            return {
-                ...state,
-                cardDeck: action.payload.deck,
-                dealerHand: action.payload.dealerHand,
-                dealerScore: action.payload.dealerScore,
-            }
-        }
-        // Reset state to initial state
-        case 'RESET': {
-            return {
-                ...state,
-                cardDeck: [],
-                playerHand: [],
-                dealerHand: [],
-                playerScore: 0,
-                dealerScore: 0,
-                gameState: Game.INIT
-            }
-        }
-
-        case 'CLOSE_MODAL': {
-            return {
-                ...state,
-                show: false,
-                message: ''
-            }
-        }
-    }
-}
-
-const initialState = {
-    cardDeck: [],
-    playerHand: [],
-    dealerHand: [],
-    playerScore: 0,
-    dealerScore: 0,
-    gameState: Game.INIT,
-    message: '',
-    show: false
-}
 
 
