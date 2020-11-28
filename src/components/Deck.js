@@ -1,4 +1,4 @@
-import {suits, values} from '../constants'
+import {suits, values} from '../constants/gameConstants'
 
 
 export default class Deck {

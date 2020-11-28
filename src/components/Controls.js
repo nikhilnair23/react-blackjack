@@ -1,4 +1,4 @@
-import {Game} from "../constants";
+import {Game} from "../constants/gameConstants";
 import '../styles/Controls.css'
 
 export const Controls = ({gameState, hit, stay}) =>

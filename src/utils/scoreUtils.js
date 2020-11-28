@@ -1,4 +1,4 @@
-import {Game, GameResults, values} from './constants'
+import {Game, GameResults, values} from '../constants/gameConstants'
 
 export const calculateScore = (deck) => {
     let hasAce = false;

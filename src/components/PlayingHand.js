@@ -1,4 +1,4 @@
-import {Game} from '../constants'
+import {Game} from '../constants/gameConstants'
 import {Card} from "./Card";
 import '../styles/PlayingHand.css'
 

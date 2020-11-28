@@ -1,5 +1,4 @@
 import {Button, Modal} from "react-bootstrap";
-import {modalStyle} from "../constants";
 
 export const ResultModal = ({show, handleClose, message}) =>
     <Modal show={show} onHide={handleClose} centered>
@@ -16,3 +15,8 @@ export const ResultModal = ({show, handleClose, message}) =>
             </Button>
         </Modal.Footer>
     </Modal>
+
+
+const modalStyle = {
+    justifyContent: "center",
+}

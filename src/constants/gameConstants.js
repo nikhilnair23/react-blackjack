@@ -16,11 +16,6 @@ export const GameResults = {
     TIE: "Game ends as a tie"
 }
 
-
-export const modalStyle ={
-    justifyContent: "center",
-}
-
 export const initialState = {
     playerHand: [],
     dealerHand: [],

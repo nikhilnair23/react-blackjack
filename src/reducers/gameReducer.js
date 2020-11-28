@@ -1,4 +1,4 @@
-import {Game} from "../constants";
+import {Game} from "../constants/gameConstants";
 
 export const gameReducer = (state, action) => {
     switch (action.type) {

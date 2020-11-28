@@ -1,10 +1,10 @@
 import '../styles/App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {useEffect, useReducer} from 'react';
-import {calculateScore, checkScores} from "../utils";
+import {calculateScore, checkScores} from "../utils/scoreUtils";
 
 import CardDeck from './Deck';
-import {Game, GameResults, initialState} from "../constants";
+import {Game, GameResults, initialState} from "../constants/gameConstants";
 import {PlayingHand} from "./PlayingHand";
 import {Controls} from "./Controls";
 import {ResultModal} from "./ResultModal";
