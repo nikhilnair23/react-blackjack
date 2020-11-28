@@ -28,10 +28,11 @@ function App() {
     const handleClose = () => actions.closeModal();
 
     // Checking for a winner every time the player draws a card (i.e) playerScore changes
+    // eslint-disable-next-line
     useEffect(() => {
         let result = checkScores(playerScore, dealerScore);
         // If there is a winner/tie dispatch 'END_GAME' action and display modal
-        if (result != GameResults.NO_WINNER && gameState != Game.END) {
+        if (result !== GameResults.NO_WINNER && gameState !== Game.END) {
             actions.endGame(result);
         }
     }, [playerScore]);
@@ -92,7 +93,7 @@ function App() {
         }
         actions.updateDealer(obj);
         // If the game hasn't ended
-        if (gameState != Game.END) {
+        if (gameState !== Game.END) {
             let result = checkScores(playerScore, score, Game.END);
             actions.endGame(result);
         }
@@ -114,15 +115,19 @@ function App() {
                 </div>
             </div>
 
-            <Controls
-                gameState={gameState}
-                hit={hit}
-                stay={stay}
-                startGame={startGame}
-                reset={reset}
-            />
 
-            <div className="container playing-space mb-3">
+            <div className="control-space mb-2">
+                <Controls
+                    gameState={gameState}
+                    hit={hit}
+                    stay={stay}
+                    startGame={startGame}
+                    reset={reset}
+                />
+            </div>
+
+
+            <div className="container playing-space ">
                 <h2 className="text-white mb-4">Player</h2>
                 <PlayingHand
                     gameState={gameState}

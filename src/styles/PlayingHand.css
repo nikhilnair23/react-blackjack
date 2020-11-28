@@ -1,0 +1,17 @@
+.playing-hand{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-width: 10em;
+    margin-right: 4em;
+}
+
+.score{
+    color: white;
+    background: #075207;
+    border-radius: 51%;
+    font-size: 2.3em;
+    width: 1.6em;
+    font-weight: bold;
+    margin: auto;
+}

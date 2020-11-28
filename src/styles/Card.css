@@ -12,14 +12,6 @@
     bottom: 10px;
 }
 
-.cardWrapper {
-    overflow: hidden;
-}
-
-.cardWrapper:last-child, .cardWrapper:hover {
-    overflow: visible;
-}
-
 .playing-card {
     width: 1.5em;
     border: none;

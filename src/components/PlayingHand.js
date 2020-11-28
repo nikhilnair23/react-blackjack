@@ -1,6 +1,6 @@
 import {Game} from '../constants'
 import {Card} from "./Card";
-import '../styles/App.css'
+import '../styles/PlayingHand.css'
 
 export const PlayingHand = ({gameState, hand, score}) =>
     <>
