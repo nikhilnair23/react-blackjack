@@ -120,13 +120,13 @@ function App() {
             />
             <div className="">
                 {gameState === Game.INIT ?
-                    <div className="btn btn btn-primary gradient"
+                    <div className="btn btn-lg btn-primary gradient"
                          onClick={startGame}
                     >
                         Start Game
                     </div>
                     :
-                    <div className="btn btn btn-primary gradient"
+                    <div className="btn btn-lg btn-primary gradient"
                          onClick={reset}
                     >
                         Restart
