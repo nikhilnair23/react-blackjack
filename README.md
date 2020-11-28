@@ -1,6 +1,6 @@
 # Project Title
 
-###**React Blackjack** 
+###React BlackJack
 
 # Project Description
 
