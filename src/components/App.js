@@ -1,23 +1,26 @@
 import '../styles/App.css';
-import Deck from './Deck';
-import {PlayingHand} from "./PlayingHand";
-import {useEffect, useReducer, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import {useEffect, useReducer} from 'react';
 import {calculateScore, checkScores} from "../utils";
-import {Game, GameResults, modalStyle} from "../constants";
+
+import CardDeck from './Deck';
+import {Game, GameResults} from "../constants";
+import {PlayingHand} from "./PlayingHand";
 import {Controls} from "./Controls";
 import {ResultModal} from "./ResultModal";
 
 
 function App() {
-
+    // Creating an instance of the deck
+    const Deck = new CardDeck();
+    // Initializing reducer with initial state
     const [state, dispatch] = useReducer(gameReducer, initialState);
-    const {cardDeck, playerHand, dealerHand, playerScore, dealerScore, gameState, show, message} = state;
 
+    const {cardDeck, playerHand, dealerHand, playerScore, dealerScore, gameState, show, message} = state;
+    // Function to close the modal
     const handleClose = () => dispatch({type: 'CLOSE_MODAL'});
 
-    // Checking for a winner every time the player draws a card
+    // Checking for a winner every time the player draws a card (i.e) playerScore changes
     useEffect(() => {
         let result = checkScores(playerScore, dealerScore);
         // If there is a winner
@@ -26,10 +29,14 @@ function App() {
         }
     }, [playerScore]);
 
-
+    /**
+     * Helper function to start the game. Involves drawing two cards for dealer and player and then dispatching
+     * the updated data to the reducer
+     */
     const startGame = () => {
-        let deck = Deck.createDeck();
-        deck = Deck.shuffle(deck);
+        Deck.createDeck();
+        Deck.shuffle();
+        let deck = Deck.getDeck();
         let dealer = deck.splice(0, 2);
         let player = deck.splice(0, 2);
         let obj = {
@@ -42,12 +49,12 @@ function App() {
         dispatch({type: 'START_GAME', payload: obj})
     }
 
-    // Restart the game and reset game state
+    // Function to reset the game by dispatching the 'RESET' action type
     const reset = () => {
         dispatch({type: 'RESET'});
     }
 
-    // Add a card to the players hand
+    // Function called when the user chooses to "Hit". A card is added to the players hand and the state is updated
     const hit = () => {
         let card = cardDeck.pop();
         playerHand.push(card);
@@ -59,7 +66,7 @@ function App() {
         dispatch({type: 'UPDATE_PLAYER', payload: obj});
     }
 
-    // When user chooses to stay, dealer draws cards until their score is 17
+    // When user chooses to stay, dealer draws cards until their score is 17 and the state is then updated
     const stay = () => {
         let score = dealerScore;
         while (score <= 17) {
