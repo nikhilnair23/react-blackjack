@@ -28,12 +28,11 @@ function App() {
     const handleClose = () => actions.closeModal();
 
     // Checking for a winner every time the player draws a card (i.e) playerScore changes
-    // eslint-disable-next-line
     useEffect(() => {
         let result = checkScores(playerScore, dealerScore);
         // If there is a winner/tie dispatch 'END_GAME' action and display modal
         if (result !== GameResults.NO_WINNER && gameState !== Game.END) {
-            actions.endGame(result);
+            endGame(result);
         }
     }, [playerScore]);
 
@@ -79,24 +78,35 @@ function App() {
         actions.updatePlayer(obj);
     }
 
-    // When user chooses to stay, dealer draws cards until their score is 17 and the state is then updated
+    // When user chooses to stay, dealer draws cards until their score is 17 and then the endGame function is called
     const stay = () => {
         let score = dealerScore;
-        while (score <= 17) {
-            dealerHand.push(Deck.drawCard());
-            score = calculateScore(dealerHand);
-        }
+        // Timing function to make the dealing of cards look smoother
+        const interval = setInterval(() => {
+            if(score >=17 ){
+                clearInterval(interval);
+                let result = checkScores(playerScore, score, Game.END);
+                endGame(result);
+            }
+            else{
+                dealerHand.push(Deck.drawCard());
+                score = calculateScore(dealerHand);
+                let obj = {
+                    dealerHand: dealerHand,
+                    dealerScore: score
+                }
+                // Update the UI with the newly drawn card
+                actions.updateDealer(obj);
+            }
+        },400)
+    }
 
-        let obj = {
-            dealerHand: dealerHand,
-            dealerScore: score
-        }
-        actions.updateDealer(obj);
-        // If the game hasn't ended
-        if (gameState !== Game.END) {
-            let result = checkScores(playerScore, score, Game.END);
+    // Helper function to end the game when there is a result.
+    // Timeout added to allow the user to see the scores before the modal appears
+    const endGame = (result) => {
+        setTimeout (() => {
             actions.endGame(result);
-        }
+        },200);
     }
 
 
@@ -125,7 +135,6 @@ function App() {
                 />
             </div>
 
-
             <div className="container playing-space ">
                 <h2 className="text-white mb-4">Player</h2>
                 <PlayingHand
@@ -141,21 +150,19 @@ function App() {
                 message={message}
             />
 
-            <div className="">
+            <>
                 {gameState === Game.INIT ?
                     <div className="btn btn-lg btn-primary"
-                         onClick={startGame}
-                    >
+                         onClick={startGame}>
                         Start Game
                     </div>
                     :
                     <div className="btn btn-lg btn-primary"
-                         onClick={reset}
-                    >
+                         onClick={reset}>
                         Restart
                     </div>
                 }
-            </div>
+            </>
         </div>
     );
 }
