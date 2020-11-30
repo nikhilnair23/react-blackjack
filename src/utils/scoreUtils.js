@@ -44,26 +44,24 @@ export const checkScores = (playerScore, dealerScore, gameState) => {
  * If a player's score goes above 21 they lose.
  */
 const checkWinner = (playerScore, dealerScore) => {
+    // Checking if player or dealer have got 21
     if (playerScore === 21 && dealerScore === 21) {
         return GameResults.TIE
-    }
-    if (playerScore === 21) {
+    } else if (playerScore === 21) {
         return GameResults.PLAYER_WINS
-    }
-    if (dealerScore === 21) {
+    } else if (dealerScore === 21) {
         return GameResults.DEALER_WINS;
-    }
-    if (playerScore > 21) {
+    // Checking if player or dealer have gone over 21
+    } else if (playerScore > 21) {
         return GameResults.DEALER_WINS;
-    }
-    if (dealerScore > 21) {
+    } else if (dealerScore > 21) {
         return GameResults.PLAYER_WINS
     }
     // Neither player or dealer have gone past 21 or got 21, so now we have to compare values
-    if (playerScore > dealerScore) {
+    else if (playerScore > dealerScore) {
         return GameResults.PLAYER_WINS
     }
-    if (dealerScore > playerScore){
+    else if (dealerScore > playerScore){
         return GameResults.DEALER_WINS;
     }else{
         return GameResults.TIE;
