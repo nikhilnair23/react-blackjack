@@ -26,7 +26,7 @@ This application was built with:
 #### `npm install`
 3. To run the app, enter the command:
 #### `npm start`
-4. The app should automatically open your browser. If not, open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4. The app should automatically open in your browser. If not, open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## How to play the game
 The rules are pretty simple: 
