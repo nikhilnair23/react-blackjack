@@ -1,10 +1,14 @@
 import {Game, GameResults, values} from '../constants/gameConstants'
 
-export const calculateScore = (deck) => {
+/**
+ * Function that takes in a "hand" of cards and calculates the score
+ */
+export const calculateScore = (hand) => {
+    // Boolean variable to check if there are any aces
     let hasAce = false;
     let score = 0;
-    for (let i = 0; i < deck.length; i++) {
-        let index = values.indexOf(deck[i].value);
+    for (let i = 0; i < hand.length; i++) {
+        let index = values.indexOf(hand[i].value);
         if (index === 0) {
             hasAce = true;
         }
@@ -14,13 +18,16 @@ export const calculateScore = (deck) => {
             score += index + 1;
         }
     }
-    if (score <= 12 && hasAce) {
+    // If the score is less than 12 and there is an Ace convert one Ace's value to 11 from 1 (add 10)
+    if (score < 12 && hasAce) {
         score += 10;
     }
     return score;
 }
 
-
+/**
+ * Function used to check if there is a winner
+ */
 export const checkScores = (playerScore, dealerScore, gameState) => {
     if (gameState === Game.END) {
         return checkWinner(playerScore, dealerScore);
@@ -33,7 +40,7 @@ export const checkScores = (playerScore, dealerScore, gameState) => {
 }
 
 /**
- * Helper function to find the winner. The below rules boil down to whoever gets 21 or is closest to 21 wins.
+ * Helper function to find the winner. The rules boil down to whomever gets 21 or is closest to 21 wins.
  * If a player's score goes above 21 they lose.
  */
 const checkWinner = (playerScore, dealerScore) => {

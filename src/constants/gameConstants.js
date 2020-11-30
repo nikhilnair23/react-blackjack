@@ -16,6 +16,7 @@ export const GameResults = {
     TIE: "Game ends as a tie"
 }
 
+// Initial state of the application
 export const initialState = {
     playerHand: [],
     dealerHand: [],
