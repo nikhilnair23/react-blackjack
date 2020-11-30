@@ -41,14 +41,14 @@ function App() {
         Deck.createDeck();
         Deck.shuffle();
         let dealerTurn = true;
-        let dealerHand =[];
+        let dealerHand = [];
         let playerHand = [];
         // Alternate dealing cards between dealer and player
-        for(let i=0 ;i<4 ;i++){
-            if (dealerTurn){
+        for (let i = 0; i < 4; i++) {
+            if (dealerTurn) {
                 dealerHand.push(Deck.drawCard());
                 dealerTurn = false;
-            }else{
+            } else {
                 playerHand.push(Deck.drawCard());
                 dealerTurn = true;
             }
@@ -83,12 +83,12 @@ function App() {
         let score = dealerScore;
         // Timing function to make the dealing of cards look smoother
         const interval = setInterval(() => {
-            if(score >=17 ){
+            if (score >= 17) {
                 clearInterval(interval);
                 let result = checkScores(playerScore, score, Game.END);
                 endGame(result);
             }
-            else{
+            else {
                 dealerHand.push(Deck.drawCard());
                 score = calculateScore(dealerHand);
                 let obj = {
@@ -98,34 +98,32 @@ function App() {
                 // Update the UI with the newly drawn card
                 actions.updateDealer(obj);
             }
-        },400)
+        }, 400)
     }
 
     // Helper function to end the game when there is a result.
     // Timeout added to allow the user to see the scores before the modal appears
     const endGame = (result) => {
-        setTimeout (() => {
+        setTimeout(() => {
             actions.endGame(result);
-        },200);
+        }, 200);
     }
 
 
     return (
         <div className="App">
             <h1 className="text-danger font-weight-bold p-2">BlackJack</h1>
-            <div className="col p-2">
-                <div className="container playing-space">
-                    <h2 className="text-white mb-4">Dealer</h2>
-                    <PlayingHand
-                        gameState={gameState}
-                        hand={dealerHand}
-                        score={dealerScore}
-                    />
-                </div>
+            <div className="container playing-space">
+                <h2 className="text-white mb-4">Dealer</h2>
+                <PlayingHand
+                    gameState={gameState}
+                    hand={dealerHand}
+                    score={dealerScore}
+                />
             </div>
 
 
-            <div className="control-space mb-4">
+            <div className="control-space mb-2">
                 <Controls
                     gameState={gameState}
                     hit={hit}
@@ -135,7 +133,7 @@ function App() {
                 />
             </div>
 
-            <div className="container playing-space ">
+            <div className="container playing-space">
                 <h2 className="text-white mb-4">Player</h2>
                 <PlayingHand
                     gameState={gameState}
